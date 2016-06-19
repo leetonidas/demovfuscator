@@ -83,6 +83,5 @@ The demovfuscator supports the following parameters:
 ### Downloads
 
 * Project Website: [https://kirschju.re/demov](https://kirschju.re/demov)
-* Sources available on github: [https://github.com/kirschju/demovfuscator](https://github.com/kirschju/demovfuscator)
-* Compiled demovfuscator (you still need the compiled dependencies): [https://kirschju.re/static/demov-compiled.tar.gz](demov-compiled.tar.gz)
-* Bachelor's thesis describing parts of the approach: [https://kirschju.re/static/ba_jonischkeit_2016.pdf](ba_jonischkeit_2016.pdf)
+* Compiled demovfuscator (you still need the compiled dependencies): [demov-compiled.tar.gz](https://kirschju.re/static/demov-compiled.tar.gz)
+* Bachelor's thesis describing parts of the approach: [ba_jonischkeit_2016.pdf](https://kirschju.re/static/ba_jonischkeit_2016.pdf)
