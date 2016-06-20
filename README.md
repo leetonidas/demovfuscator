@@ -58,7 +58,7 @@ The demovfuscator is programmed in C++ and as such has several (cool) dependenci
   * [http://www.keystone-engine.org/](libkeystone) for re-substitution
 
 As inconvenient this may be, we think that all three libraries should be in your
-RE toolchain anyway. If this is just unaccpetable for you (and you trust us),
+RE toolchain anyway. If this is just unacceptable for you (and you trust us),
 there is a binary package that can be downloaded below.
 
 After installing the dependencies, simply type `make` in the `demov` root
