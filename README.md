@@ -32,7 +32,7 @@
 ### Summary
 
 Since the publication of Christopher Domas'
-[https://github.com/xoreaxeaxeax/movfuscator](M/o/Vfuscator), we spent a great
+[M/o/Vfuscator](https://github.com/xoreaxeaxeax/movfuscator), we spent a great
 amount of time to analyze the inner workings of the famous
 one-instruction-compiler. We are happy to announce and release the (to our
 knowledge) first approach to a generic demovfuscator.
@@ -53,9 +53,9 @@ that were not created by us.
 
 The demovfuscator is programmed in C++ and as such has several (cool) dependencies:
 
-  * [http://www.capstone-engine.org/](libcapstone) as the core disassembler
-  * [https://github.com/Z3Prover/z3](libz3) to reason about the semantics of the mov code
-  * [http://www.keystone-engine.org/](libkeystone) for re-substitution
+  * [libcapstone](http://www.capstone-engine.org/) as the core disassembler
+  * [libz3](https://github.com/Z3Prover/z3) to reason about the semantics of the mov code
+  * [libkeystone](http://www.keystone-engine.org/) for re-substitution
 
 As inconvenient this may be, we think that all three libraries should be in your
 RE toolchain anyway. If this is just unacceptable for you (and you trust us),
