@@ -119,28 +119,28 @@ int dishlp::trace_back(std::stack<element, c> *st,
 				break;
 			}
 			if (is_sel_mem(&OP(ori, 1), 0)) {
-				if (trace_back(st, ori, OP(ori, 1).mem.index, limit))
+				if (trace_back(st, ori, (x86_reg) OP(ori, 1).mem.index, limit))
 					st->push(inv_ele);
 				st->push(el);
 				break;
 			}
 			if (is_reg_mem(&OP(ori, 1), X86_REG_INVALID)) {
-				if (trace_back(st, ori, OP(ori, 1).mem.base, limit))
+				if (trace_back(st, ori, (x86_reg) OP(ori, 1).mem.base, limit))
 					st->push(inv_ele);
 				st->push(el);
 				break;
 			}
-			tmp = trace_back(ori, OP(ori, 1).mem.base, limit);
+			tmp = trace_back(ori, (x86_reg) OP(ori, 1).mem.base, limit);
 			if (!tmp) {
 				st->push(inv_ele);
-				if (trace_back(st, ori, OP(ori, 1).mem.index, limit))
+				if (trace_back(st, ori, (x86_reg) OP(ori, 1).mem.index, limit))
 					st->push(inv_ele);
 				st->push(el);
 				break;
 			}
 			if (is_sel_mem(&OP(tmp, 1), 0)) {
-				trace_back(st, tmp, OP(tmp, 1).mem.index, limit);
-				trace_back(st, ori, OP(ori, 1).mem.index, limit);
+				trace_back(st, tmp, (x86_reg) OP(tmp, 1).mem.index, limit);
+				trace_back(st, ori, (x86_reg) OP(ori, 1).mem.index, limit);
 				symbl sym = mem->analyse_table((uint64_t) OP(tmp, 1).mem.disp,
 												2);
 				if (sym == SYM_INVALID) {

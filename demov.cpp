@@ -106,8 +106,8 @@ int demov::analyse_sigaction(cs_insn *ins, size_t num, uint32_t **ret) {
 	for (cur = num - 1; (sig == -1 || ret_mem == 0); cur--) {
 		if(ins[cur].id != X86_INS_MOV) return -1;
 		if(ins[cur].detail->x86.operands[0].type != X86_OP_MEM ||
-		   ins[cur].detail->x86.operands[0].mem.base != X86_REG_ESP ||
-		   ins[cur].detail->x86.operands[0].mem.index != X86_REG_INVALID ||
+		   (x86_reg) ins[cur].detail->x86.operands[0].mem.base != X86_REG_ESP ||
+		   (x86_reg) ins[cur].detail->x86.operands[0].mem.index != X86_REG_INVALID ||
 		   ins[cur].detail->x86.operands[1].type != X86_OP_IMM)
 			continue;
 		if(ins[cur].detail->x86.operands[0].mem.disp == 0 && sig == -1)
@@ -252,15 +252,15 @@ int demov::parse_entry() {
 	
 	for (; i < num; i++) {
 		if (OP(ins + i, 1).type == X86_OP_MEM &&
-		    OP(ins + i, 1).mem.base != X86_REG_INVALID &&
-			OP(ins + i, 1).mem.index != X86_REG_INVALID &&
+			(x86_reg) OP(ins + i, 1).mem.base != X86_REG_INVALID &&
+			(x86_reg) OP(ins + i, 1).mem.index != X86_REG_INVALID &&
 			OP(ins + i, 1).mem.scale == 4 && OP(ins + i, 1).mem.disp == 0) {
-			cs_insn *a = dis.trace_back(ins + i, OP(ins + i, 1).mem.base, 0);
+			cs_insn *a = dis.trace_back(ins + i, (x86_reg) OP(ins + i, 1).mem.base, 0);
 			if (!is_sel_mem(&OP(a, 1), 0) ||
 			    mem->analyse_table((uint64_t) OP(a, 1).mem.disp, 2) != SYM_ALU_ADD)
 				continue;
-			cs_insn *x = dis.trace_back(a, OP(a, 1).mem.index, 0);
-			cs_insn *y = dis.trace_back(ins + i, OP(ins + i, 1).mem.index, 0);
+			cs_insn *x = dis.trace_back(a, (x86_reg) OP(a, 1).mem.index, 0);
+			cs_insn *y = dis.trace_back(ins + i, (x86_reg) OP(ins + i, 1).mem.index, 0);
 			std::cerr << std::hex;
 			if (is_dir_mem(&OP(x, 1), 0))
 				std::cerr << "alu_x@" << OP(x, 0).mem.disp << std::endl;
@@ -556,7 +556,7 @@ uint64_t demov::analyse_sel_on(cs_insn *ins) {
 	std::stack<element> st;
 
 	// find the condition of the toggle
-	dis.trace_back(&st, ins, OP(ins, 1).mem.index, 0 /*sel_on*/);
+	dis.trace_back(&st, ins, (x86_reg) OP(ins, 1).mem.index, 0 /*sel_on*/);
 	// std::cout << std::hex << "toggle on if" << std::endl;
 	if (st.top().type == ELE_MEM && st.size() == 1) {
 		// specially for the toggle_execution statement
@@ -713,7 +713,7 @@ int demov::analyse() {
 					std::stack<element> st;
 					// search backwards
 					if (dis.trace_back(&st, ins + i,
-					                   OP(ins + i, 1).mem.index, sel_on))
+									   (x86_reg) OP(ins + i, 1).mem.index, sel_on))
 						throw 6;
 					// if toggle is unconditional
 					if (st.top().type == ELE_MEM &&
@@ -836,7 +836,7 @@ int demov::patch_ret(cs_insn *tg) {
 
 int demov::patch_jcc(cs_insn *sel, cs_insn *tg, uint64_t tar) {
 	assert(sel->size >= 2 && tg->size >= 6);
-	uint8_t *tst_cd = test_patch(OP(sel, 1).mem.index);
+	uint8_t *tst_cd = test_patch((x86_reg) OP(sel, 1).mem.index);
 	uint8_t *buf = mem->get_ptr(sel->address);
 	uint32_t rip = tg->address + 6;
 	buf[0] = tst_cd[0];

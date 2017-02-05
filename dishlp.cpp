@@ -3,23 +3,23 @@
 
 
 int is_dir_mem(cs_x86_op *op, uint64_t addr) {
-	if (op->type == X86_OP_MEM && op->mem.base == X86_REG_INVALID &&
-	    op->mem.index == X86_REG_INVALID)
+	if (op->type == X86_OP_MEM && (x86_reg) op->mem.base == X86_REG_INVALID &&
+		(x86_reg) op->mem.index == X86_REG_INVALID)
 		return (addr ? addr == ((uint64_t) op->mem.disp) : 1);
 	return 0;
 }
 
 int is_sel_mem(cs_x86_op *op, uint64_t addr) {
-	if (op->type == X86_OP_MEM && op->mem.base == X86_REG_INVALID &&
-	    op->mem.index != X86_REG_INVALID && op->mem.scale == 4)
+	if (op->type == X86_OP_MEM && (x86_reg) op->mem.base == X86_REG_INVALID &&
+		(x86_reg) op->mem.index != X86_REG_INVALID && op->mem.scale == 4)
 		return (addr ? addr == ((uint64_t) op->mem.disp) : 1);
 	return 0;
 }
 
 int is_reg_mem(cs_x86_op *op, x86_reg reg) {
-	if (op->type == X86_OP_MEM && op->mem.index == X86_REG_INVALID &&
+	if (op->type == X86_OP_MEM && (x86_reg) op->mem.index == X86_REG_INVALID &&
 	    op->mem.disp == 0)
-		return (reg != X86_REG_INVALID ? reg == op->mem.base : 1);
+		return (reg != X86_REG_INVALID ? reg == (x86_reg) op->mem.base : 1);
 	return 0;
 }
 
@@ -90,11 +90,11 @@ void dishlp::find_regs(std::vector<uint32_t> *regs, cs_insn *ins, uint64_t label
 
 		// either	mov [rega], regb
 		// or		mov [rega + 4], b
-		if (OP(ins, 0).type == X86_OP_MEM && OP(ins, 0).mem.index == X86_REG_INVALID &&
-		    OP(ins, 0).mem.base != X86_REG_INVALID && OP(ins, 1).type == X86_OP_REG &&
+		if (OP(ins, 0).type == X86_OP_MEM && (x86_reg) OP(ins, 0).mem.index == X86_REG_INVALID &&
+			(x86_reg) OP(ins, 0).mem.base != X86_REG_INVALID && OP(ins, 1).type == X86_OP_REG &&
 			(OP(ins, 0).mem.disp == 0 || OP(ins, 0).mem.disp == 4)) {
 			// trace back the target
-			cs_insn *ori = trace_back(ins, OP(ins, 0).mem.base, 0);
+			cs_insn *ori = trace_back(ins, (x86_reg) OP(ins, 0).mem.base, 0);
 			if (ori && is_sel_mem(&OP(ori, 1), 0)) {
 				// find where the value for true is set
 				ori = trace_mem(ins , (uint64_t) OP(ori, 1).mem.disp + 4, 0, true);

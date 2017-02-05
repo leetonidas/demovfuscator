@@ -8,9 +8,9 @@ char names[][4] = {"eax", "ebx", "ecx", "edx",
 	"ax", "bx", "cx", "dx", "al", "ah", "bl", "bh",
 	"cl", "ch", "dl", "dh", "err"};
 
-char* get_name(x86_reg reg) {
+char* get_name(unsigned int reg) {
 	char *ret;
-	switch (reg) {
+	switch ((x86_reg) reg) {
 		case X86_REG_EAX:
 			ret = names[0];
 			break;
