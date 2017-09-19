@@ -622,6 +622,16 @@ int demov::analyse() {
 				break;
 			}
 
+			if (is_sel_mem(&(ins[i].detail->x86.operands[1]), 0)) {
+				cs_insn *ins_tmp = dis.trace_mem(ins + i - 1, ins[i].detail->x86.operands[1].mem.disp, 0, true);
+				if (ins_tmp != nullptr) {
+					ins_tmp = dis.trace_back(ins_tmp, ins_tmp->detail->x86.operands[1].reg, 0);
+					if (is_dir_mem(&(ins_tmp->detail->x86.operands[1]), on)) {
+						analyse_sel_on(ins + i);
+					}
+				}
+			}
+
 			// find the label + jump target register
 			if (is_sel_mem(&(ins[i].detail->x86.operands[1]), sel_on)) {
 				analyse_sel_on(ins + i);
