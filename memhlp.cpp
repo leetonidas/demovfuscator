@@ -205,8 +205,8 @@ std::string memhlp::dump_syms_idc() {
 		if (x.second == SYM_STP_SUB4 || x.second == SYM_STP_ADD4)
 			continue;
 		ret << "\tMakeName(0x";
-		ret << x.first << ", " << get_sym_name(x.second);
-		ret << ");" << std::endl;
+		ret << x.first << ", \"" << get_sym_name(x.second);
+		ret << "\");" << std::endl;
 	}
 	return ret.str();
 }
