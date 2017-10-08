@@ -491,13 +491,13 @@ std::string demov::dump_idc() {
 		regtmp.pop_back();
 		std::vector<uint32_t>::iterator tmp;
 		tmp = std::find(regtmp.begin(), regtmp.end(), cur);
-		ret << "\tMakeName(0x" << cur << ", ";
+		ret << "\tMakeName(0x" << cur << ", \"";
 		if (tmp != regtmp.end()) {
 			regtmp.erase(tmp);
-			ret << "D" << d++ << ");" << std::endl;
+			ret << "D" << d++ << "\");" << std::endl;
 		}
 		else
-			ret << "R" << r++ << ");" << std::endl;
+			ret << "R" << r++ << "\");" << std::endl;
 	}
 	ret << mem->dump_syms_idc();
 	return ret.str();

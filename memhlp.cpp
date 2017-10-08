@@ -14,176 +14,176 @@ std::string memhlp::get_sym_name(enum symbl sym) {
 	std::stringstream ret;
 	switch (sym) {
 		case SYM_ON:
-			ret << "on";
+			ret << "demov_on";
 			break;
 		case SYM_SEL_ON:
-			ret << "sel_on";
+			ret << "demov_sel_on";
 			break;
 		case SYM_M_LOOP:
-			ret << "master_loop";
+			ret << "demov_master_loop";
 			break;
 		case SYM_ENTRYP:
-			ret << "entrypoint";
+			ret << "demov_entrypoint";
 			break;
 		case SYM_ALU_EQ:
-			ret << "equal";
+			ret << "demov_equal";
 			break;
 		case SYM_ALU_ADD:
-			ret << "add";
+			ret << "demov_add";
 			break;
 		case SYM_BIT_SET:
-			ret << "bit_set";
+			ret << "demov_bit_set";
 			break;
 		case SYM_BIT_CLR:
-			ret << "bit_clear";
+			ret << "demov_bit_clear";
 			break;
 		case SYM_IMP_BAND:
 		case SYM_ALU_AND:
-			ret << "and";
+			ret << "demov_and";
 			break;
 		case SYM_ALU_OR:
-			ret << "or";
+			ret << "demov_or";
 			break;
 		case SYM_ALU_XOR:
-			ret << "xor";
+			ret << "demov_xor";
 			break;
 		case SYM_ALU_SHL:
-			ret << "shl";
+			ret << "demov_shl";
 			break;
 		case SYM_ALU_SHR:
-			ret << "shr";
+			ret << "demov_shr";
 			break;
 		case SYM_ALU_SARI:
-			ret << "sari";
+			ret << "demov_sari";
 			break;
 		case SYM_ALU_MULL:
-			ret << "mul_l";
+			ret << "demov_mul_l";
 			break;
 		case SYM_ALU_MULH:
-			ret << "mul_h";
+			ret << "demov_mul_h";
 			break;
 		case SYM_BOOL_OR:
-			ret << "bool_or";
+			ret << "demov_bool_or";
 			break;
 		case SYM_BOOL_XOR:
-			ret << "bool_xor";
+			ret << "demov_bool_xor";
 			break;
 		case SYM_BOOL_XNOR:
-			ret << "bool_xnor";
+			ret << "demov_bool_xnor";
 			break;
 		case SYM_BOOL_AND:
-			ret << "bool_and";
+			ret << "demov_bool_and";
 			break;
 		case SYM_TARGET:
-			ret << "target_reg";
+			ret << "demov_target_reg";
 			break;
 		case SYM_SEL_TARGET:
-			ret << "sel_target";
+			ret << "demov_sel_target";
 			break;
 		case SYM_SP:
-			ret << "esp";
+			ret << "demov_esp";
 			break;
 		case SYM_END:
-			ret << "end";
+			ret << "demov_end";
 			break;
 		case SYM_ALU_TRUE:
-			ret << "SYM_ALU_TRUE";
+			ret << "demov_SYM_ALU_TRUE";
 			break;
 		case SYM_ALU_FALSE:
-			ret << "SYM_ALU_FALSE";
+			ret << "demov_SYM_ALU_FALSE";
 			break;
 		case SYM_ALU_B0:
-			ret << "SYM_ALU_B0";
+			ret << "demov_SYM_ALU_B0";
 			break;
 		case SYM_ALU_B1:
-			ret << "SYM_ALU_B1";
+			ret << "demov_SYM_ALU_B1";
 			break;
 		case SYM_ALU_B2:
-			ret << "SYM_ALU_B2";
+			ret << "demov_SYM_ALU_B2";
 			break;
 		case SYM_ALU_B3:
-			ret << "SYM_ALU_B3";
+			ret << "demov_SYM_ALU_B3";
 			break;
 		case SYM_ALU_B4:
-			ret << "SYM_ALU_B4";
+			ret << "demov_SYM_ALU_B4";
 			break;
 		case SYM_ALU_B5:
-			ret << "SYM_ALU_B5";
+			ret << "demov_SYM_ALU_B5";
 			break;
 		case SYM_ALU_B6:
-			ret << "SYM_ALU_B6";
+			ret << "demov_SYM_ALU_B6";
 			break;
 		case SYM_ALU_B7:
-			ret << "SYM_ALU_B7";
+			ret << "demov_SYM_ALU_B7";
 			break;
 		case SYM_ALU_ADD8L:
-			ret << "SYM_ALU_ADD8L";
+			ret << "demov_SYM_ALU_ADD8L";
 			break;
 		case SYM_ALU_ADD8H:
-			ret << "SYM_ALU_ADD8H";
+			ret << "demov_SYM_ALU_ADD8H";
 			break;
 		case SYM_ALU_INV8:
-			ret << "SYM_ALU_INV8";
+			ret << "demov_SYM_ALU_INV8";
 			break;
 		case SYM_ALU_INV16:
-			ret << "SYM_ALU_INV16";
+			ret << "demov_SYM_ALU_INV16";
 			break;
 		case SYM_ALU_CLAMP32:
-			ret << "SYM_ALU_CLAMP32";
+			ret << "demov_SYM_ALU_CLAMP32";
 			break;
 		case SYM_ALU_MUL_SUM8L:
-			ret << "SYM_ALU_MUL_SUM8L";
+			ret << "demov_SYM_ALU_MUL_SUM8L";
 			break;
 		case SYM_ALU_MUL_SUM8H:
-			ret << "SYM_ALU_MUL_SUM8H";
+			ret << "demov_SYM_ALU_MUL_SUM8H";
 			break;
 		case SYM_ALU_MUL_SHL2:
-			ret << "SYM_ALU_MUL_SHL2";
+			ret << "demov_SYM_ALU_MUL_SHL2";
 			break;
 		case SYM_ALU_MUL_SUMS:
-			ret << "SYM_ALU_MUL_SUMS";
+			ret << "demov_SYM_ALU_MUL_SUMS";
 			break;
 		case SYM_ALU_DIV_SHL1_8_C_D:
-			ret << "SYM_ALU_DIV_SHL1_8_C_D";
+			ret << "demov_SYM_ALU_DIV_SHL1_8_C_D";
 			break;
 		case SYM_ALU_DIV_SHL1_8_D:
-			ret << "SYM_ALU_DIV_SHL1_8_D";
+			ret << "demov_SYM_ALU_DIV_SHL1_8_D";
 			break;
 		case SYM_ALU_DIV_SHL2_8_D:
-			ret << "SYM_ALU_DIV_SHL2_8_D";
+			ret << "demov_SYM_ALU_DIV_SHL2_8_D";
 			break;
 		case SYM_ALU_DIV_SHL3_8_D:
-			ret << "SYM_ALU_DIV_SHL3_8_D";
+			ret << "demov_SYM_ALU_DIV_SHL3_8_D";
 			break;
 		case SYM_ALU_SEX8:
-			ret << "SYM_ALU_SEX8";
+			ret << "demov_SYM_ALU_SEX8";
 			break;
 		case SYM_DATA:
-			ret << "SYM_DATA";
+			ret << "demov_SYM_DATA";
 			break;
 		case SYM_SEL_DATA:
-			ret << "SYM_SEL_DATA";
+			ret << "demov_SYM_SEL_DATA";
 			break;
 		case SYM_INVALID:
-			ret << "invalid";
+			ret << "demov_invalid";
 			break;
 		case SYM_STP_ADD4:
-			ret << "STACK_ADD4(pop)";
+			ret << "demov_STACK_ADD4(pop)";
 			break;
 		case SYM_STP_SUB4:
-			ret << "STACK_SUB4(push)";
+			ret << "demov_STACK_SUB4(push)";
 			break;
 		case SYM_DISCARD:
-			ret << "DISCARD";
+			ret << "demov_DISCARD";
 			break;
 		case SYM_DISPATCH:
-			ret << "DISPATCH";
+			ret << "demov_DISPATCH";
 			break;
 		case SYM_FAULT:
-			ret << "FAULT";
+			ret << "demov_FAULT";
 			break;
 		default:
-			ret << "unrecognized";
+			ret << "demov_unrecognized";
 			break;
 	}
 	return ret.str();
@@ -205,8 +205,8 @@ std::string memhlp::dump_syms_idc() {
 		if (x.second == SYM_STP_SUB4 || x.second == SYM_STP_ADD4)
 			continue;
 		ret << "\tMakeName(0x";
-		ret << x.first << ", " << get_sym_name(x.second);
-		ret << ");" << std::endl;
+		ret << x.first << ", \"" << get_sym_name(x.second);
+		ret << "\");" << std::endl;
 	}
 	return ret.str();
 }
