@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	elfhlp elf;
 	uint64_t entry;
 
-	while ((opt = getopt(argc, argv, "o:g:i:c")) != -1 ) {
+	while ((opt = getopt(argc, argv, "o:g:i:c:h")) != -1 ) {
 		switch (opt) {
 			case 'o':
 				out = true;
@@ -37,15 +37,31 @@ int main(int argc, char** argv) {
 			case 'c':
 				patch_call = true;
 				break;
+			case 'h':
+				std::cout << "The demovfuscator supports the ";
+				std::cout << "following parameters:" << std::endl;
+				std::cout << std::endl << " ./demov [-h] [-i ";
+				std::cout << "symbols.idc] [-o patched_bin] [-g ";
+				std::cout << "cfg.dot] obfuscated_input" << std::endl;
+				std::cout << std::endl << " -h Use for a description ";
+				std::cout << " of the options" << std::endl;
+				std::cout << " -i Derive symbols from the input bin ";
+				std::cout << "and store them into symbols.idc" << std::endl;
+				std::cout << " -o Generate a UNIX dot compatible ";
+				std::cout << "file containing the control flow" << std::endl;
+				std::cout << "	graph (might be easier to read than ";
+				std::cout << " IDA\'s graph view)" << std::endl;
+				std::cout << "	Convert the .dot file to something ";
+				std::cout << "usable by" << std::endl << std::endl;
+				std::cout << "	cat cfg.dot | dot -Tpng > cfg.png";
+				std::cout << std::endl;
+				exit(0);
 			default:
-				std::cerr << "Usage: demov [-o patched] [-g graph] ";
-				std::cerr << "[-i idc]";
-				std::cerr << std::endl;
+				std::cerr << "Usage: demov [-h] [-o patched] ";
+                std::cerr << "[-g graph] [-i idc]"<< std::endl;
 				exit(1);
 		}
 	}
-
-
 
 	for (int i = optind; i < argc; i++) {
 		int tmp;

@@ -69,8 +69,9 @@ paths to match your distro.
 
 The demovfuscator supports the following parameters:
 
-	./demov [-i symbols.idc] [-o patched_bin] [-g cfg.dot] obfuscated_input
+	./demov [-h] [-i symbols.idc] [-o patched_bin] [-g cfg.dot] obfuscated_input
 
+	-h Use for a description of the options
 	-i Derive symbols from the input bin and store them into symbols.idc
 	-o Generate a patched executable with explicit control flow and some
 	   instructions resubstituted
