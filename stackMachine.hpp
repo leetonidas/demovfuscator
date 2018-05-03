@@ -5,7 +5,7 @@
 #include <stack>
 #include <queue>
 #include <string>
-#include <z3/z3++.h>
+#include <z3++.h>
 #include "memhlp.hpp"
 
 #define inv_ele {ELE_INVALID, {SYM_INVALID}}
