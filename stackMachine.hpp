@@ -58,7 +58,7 @@ uint64_t get_label(std::stack<element, c> st, uint64_t *addr) {
 		z3::func_decl v = m[i];
 		assert(v.is_const());
 		z3::expr cn = m.get_const_interp(v);
-		if (Z3_get_numeral_uint64(ctx, cn,(unsigned long long*)  &ret)) {
+		if (Z3_get_numeral_uint64(ctx, cn,(uint64_t*)  &ret)) {
 			*addr = mv;
 			return ret;
 		}
@@ -75,7 +75,7 @@ z3::expr gen_expr(std::stack<element, c> *st,
 	st->pop();
 
 	if (cur.type == ELE_CONST) {
-		ret = ctx->bv_val((unsigned long long) cur.imm, 32);
+		ret = ctx->bv_val((uint64_t) cur.imm, 32);
 	} if (cur.type == ELE_MEM) {
 		if (!*mem_valid) {
 			*mv = (uint64_t) cur.mem.disp;
