@@ -1,7 +1,7 @@
 OBJS = elfhlp.o demov.o test.o memhlp.o dishlp.o utils.o ctlhlp.o ctlelem.o node.o asmhlp.o
 CC = clang++
 FLAGS = -Wall -Wextra -pedantic -std=c++11
-CFLAGS = $(FLAGS) -g -c
+CFLAGS = $(FLAGS) -O3 -c
 LFLAGS = $(FLAGS) -lcapstone -lkeystone -lz3 -lssl -lcrypto
 
 demov: $(OBJS)

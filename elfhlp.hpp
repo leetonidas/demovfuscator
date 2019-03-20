@@ -21,15 +21,15 @@ class elfhlp{
 		int open(std::string file);
 		uint32_t get_entrypoint();
 		bool isx86mov();
-		std::unordered_map<unsigned long, std::string>* getrelocations();
-		std::map<unsigned long, std::tuple<uint8_t *,
-		                                   unsigned long, int>>* getsegments();
-		unsigned long get_size();
+		std::unordered_map<uint64_t, std::string>* getrelocations();
+		std::map<uint64_t, std::tuple<uint8_t *,
+		                                   uint64_t, int>>* getsegments();
+		uint64_t get_size();
 		uint8_t *get_buf();
 	private:
 		std::string file;
 		uint8_t *buf;
-		unsigned long size;
+		uint64_t size;
 		int fd;
 };
 

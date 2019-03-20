@@ -32,7 +32,7 @@ void demov::set_relocations(std::unordered_map<uint64_t, std::string> *rels) {
 }
 
 void demov::set_segments(std::map<uint64_t,
-                         std::tuple<uint8_t *, size_t, int>> *segs){
+                         std::tuple<uint8_t *, uint64_t, int>> *segs){
 	mem->set_segments(segs);
 	state |= ST_SEG;
 }
@@ -524,7 +524,8 @@ void demov::dump_regs() {
 }
 
 uint64_t demov::analyse_sel_on(cs_insn *ins) {
-	bool on, off;
+	bool on = false;
+	bool off = false;
 	uint64_t bbstart;
 	std::vector<cs_insn *> tr;
 
@@ -582,7 +583,7 @@ uint64_t demov::analyse_sel_on(cs_insn *ins) {
 				assert(addr == target_reg);
 
 		} catch (int ex) {
-			std::cout << "ERROR: Shit is broken" << ex;
+			std::cout << "ERROR: Shit is broken " << ex << std::endl;
 		}
 		//std::cout << "[ " << addr << "] == " << label << std::endl;
 	}

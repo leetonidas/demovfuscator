@@ -44,9 +44,9 @@ template<typename c>
 uint64_t get_label(std::stack<element, c> st, uint64_t *addr) {
 	z3::context ctx;
 	z3::expr mem = ctx.int_val(0);
-	uint64_t mv;
-	uint64_t ret;
-	bool mem_valid;
+	uint64_t mv = 0;
+	uint64_t ret = 0;
+	bool mem_valid = false;
 	auto res = gen_expr(&st, &ctx, &mem, &mv, &mem_valid).simplify();
 	z3::solver s(ctx);
 
@@ -191,6 +191,7 @@ std::stack<element, c> simplify_stack(std::stack<element, c> st) {
 					case SYM_BOOL_XOR:
 					case SYM_BOOL_XNOR:
 						ign++;
+					/* fallthrough */
 					default:
 						break;
 				}

@@ -13,7 +13,7 @@
 #include "elfhlp.hpp"
 
 template <class T>
-T* addp(T *ptr, unsigned long inc) {
+T* addp(T *ptr, uint64_t inc) {
 	return (T*) (((uint8_t *) ptr) + inc);
 }
 
@@ -95,8 +95,8 @@ int elfhlp::open(std::string file){
 	}
 }
 
-std::unordered_map<unsigned long, std::string>* elfhlp::getrelocations(){
-	std::unordered_map<unsigned long, std::string> *rels;
+std::unordered_map<uint64_t, std::string>* elfhlp::getrelocations(){
+	std::unordered_map<uint64_t, std::string> *rels;
 	Elf32_Ehdr *ehdr = (Elf32_Ehdr*) buf;
 	Elf32_Shdr *sbase;
 	Elf32_Rel *rel;
@@ -105,7 +105,7 @@ std::unordered_map<unsigned long, std::string>* elfhlp::getrelocations(){
 	char *str;
 
 	if (buf == NULL) return NULL;
-	rels = new std::unordered_map<unsigned long, std::string>();
+	rels = new std::unordered_map<uint64_t, std::string>();
 	sbase = (Elf32_Shdr*) (buf + ehdr->e_shoff);
 
 	for (int i = 0; i < ehdr->e_shnum; i++) {
@@ -126,7 +126,7 @@ std::unordered_map<unsigned long, std::string>* elfhlp::getrelocations(){
 
 			for (int x = 0; x < num; x++) {
 				Elf32_Rel *cur;
-				unsigned long addr;
+				uint64_t addr;
 				std::string name;
 				cur = addp(rel, x * sbase[i].sh_entsize);
 				addr = cur->r_offset;
@@ -141,20 +141,20 @@ std::unordered_map<unsigned long, std::string>* elfhlp::getrelocations(){
 	return rels;
 }
 
-std::map<unsigned long, std::tuple<uint8_t *, unsigned long, int>>*
+std::map<uint64_t, std::tuple<uint8_t *, uint64_t, int>>*
 elfhlp::getsegments(){
-	std::map<unsigned long, std::tuple<uint8_t *, unsigned long, int>> *seg;
+	std::map<uint64_t, std::tuple<uint8_t *, uint64_t, int>> *seg;
 	Elf32_Ehdr *ehdr = (Elf32_Ehdr *) buf;
 	Elf32_Phdr *pbase;
 
 	if (buf == NULL) return NULL;
-	seg = new std::map<unsigned long, std::tuple<uint8_t *, unsigned long, int>>();
+	seg = new std::map<uint64_t, std::tuple<uint8_t *, uint64_t, int>>();
 
 	pbase = (Elf32_Phdr*) (buf + ehdr->e_phoff);
 	for (int i = 0; i < ehdr->e_phnum; i++) {
 		if (pbase[i].p_type == PT_LOAD) {
-			std::tuple<uint8_t *, unsigned long, int>  data;
-			unsigned long addr;
+			std::tuple<uint8_t *, uint64_t, int>  data;
+			uint64_t addr;
 			// std::cout << "Found loadable segment" << std::endl;
 			addr = pbase[i].p_vaddr;
 			data = std::make_tuple(buf + pbase[i].p_offset,
@@ -174,7 +174,7 @@ elfhlp::getsegments(){
 	return seg;
 }
 
-unsigned long elfhlp::get_size() {
+uint64_t elfhlp::get_size() {
 	return size;
 }
 

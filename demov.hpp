@@ -38,9 +38,9 @@ enum demov_state{
 class demov{
 	public:
 		demov();
-		void set_relocations(std::unordered_map<unsigned long, std::string>*);
-		void set_segments(std::map<unsigned long,
-		                  std::tuple<uint8_t *, unsigned long, int>>*);
+		void set_relocations(std::unordered_map<uint64_t, std::string>*);
+		void set_segments(std::map<uint64_t,
+		                  std::tuple<uint8_t *, uint64_t, int>>*);
 		void set_entrypoint(uint64_t);
 		int analyse_sigaction(cs_insn *ins, size_t num, uint32_t **ret);
 		int parse_entry();
@@ -87,7 +87,7 @@ class demov{
 		uint64_t target_reg = 0;
 		uint64_t tar;
 		uint32_t stackp = 0;
-		std::unordered_map<unsigned long, std::string>* relocations;
+		std::unordered_map<uint64_t, std::string>* relocations;
 		std::shared_ptr<memhlp> mem;
 		std::unordered_map<uint64_t, uint64_t> jmp_tar;
 		std::map<uint64_t, bool> ret_tar;

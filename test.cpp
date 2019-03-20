@@ -72,8 +72,8 @@ int main(int argc, char** argv) {
 			continue;
 		}
 		demov de;
-		std::unordered_map<unsigned long, std::string> *rel;
-		std::map<unsigned long, std::tuple<uint8_t *,unsigned long, int>> *seg;
+		std::unordered_map<uint64_t, std::string> *rel;
+		std::map<uint64_t, std::tuple<uint8_t *,uint64_t, int>> *seg;
 		std::cout << (elf.isx86mov() ? "possibly" : "not");
 		std::cout << " movfuscated" << std::endl;
 		rel = elf.getrelocations();
