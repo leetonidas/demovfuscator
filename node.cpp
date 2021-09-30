@@ -75,7 +75,7 @@ void node::merge() {
 			auto n = nodes.find(y.first);
 			assert (n != nodes.end());
 			// if the only incoming connections is ADJ_CONT
-			if (n->second.val == 1) {
+			if (n->second.val == adj_type::ADJ_CNT) {
 				//merge the nodes
 				mrg = true;
 				if (n->second.end > x->second.end)
