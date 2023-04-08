@@ -13,7 +13,7 @@ int tainthlp::add_taint(uint32_t base, size_t len, size_t ref) {
 		return 1;
 }
 
-bool tainthlp::has_taint(uint32_t base, size_t len, size_t ref) {
+bool tainthlp::has_taint(uint32_t base, size_t len) {
 	std::map<uint32_t, size_t>::iterator it = mem_taint.lower_bound(base);
 	if (it->first < base + len)
 		return true;
@@ -21,8 +21,8 @@ bool tainthlp::has_taint(uint32_t base, size_t len, size_t ref) {
 		return false;
 }
 
-size_t tainthlp::get_taint(uin32_t addr) {
-	std::map<uint32_t size_t>::iterator it = mem_taint.find(addr);
+size_t tainthlp::get_taint(uint32_t addr) {
+	std::map<uint32_t, size_t>::iterator it = mem_taint.find(addr);
 	if (it == mem_taint.end())
 		return 0;
 	else
@@ -84,11 +84,13 @@ int tainthlp::add_taint(x86_reg reg, size_t ref) {
 	}
 }
 
-int tainthlp::has_taint(x86_reg reg) {
+bool tainthlp::has_taint(x86_reg reg) {
 	return reg_taint.find(reg) != reg_taint.end();
 }
 
-int tainthlp::get_taint(x86_reg reg) {
-	if (!has_taint(reg)) return 0;
-	return reg_taint.find(reg)->second;
+size_t tainthlp::get_taint(x86_reg reg) {
+	auto it = reg_taint.find(reg);
+	if (it != reg_taint.end())
+		return it->second;
+	return 0;
 }

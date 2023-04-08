@@ -3,6 +3,8 @@
 #include "stackMachine.hpp"
 #include "utils.hpp"
 
+static uint8_t tst_pt[4][2] = {{0x85, 0xc0}, {0x85, 0xdb}, {0x85, 0xc9}, {0x85, 0xd2}};
+static uint8_t jmp_ins[2] = {0x0f, 0x84};
 
 char names[][4] = {"eax", "ebx", "ecx", "edx",
 	"ax", "bx", "cx", "dx", "al", "ah", "bl", "bh",

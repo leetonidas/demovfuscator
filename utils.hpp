@@ -1,8 +1,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-static uint8_t tst_pt[4][2] = {{0x85, 0xc0}, {0x85, 0xdb}, {0x85, 0xc9}, {0x85, 0xd2}};
-static uint8_t jmp_ins[2] = {0x0f, 0x84};
+#include <cstdint>
+#include <capstone/x86.h>
+
+#include "stackMachine.hpp"
 
 char *get_name(unsigned int reg);
 void print_func(symbl sym);

@@ -1,4 +1,5 @@
 #include <elf.h>
+#include <sstream>
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -556,8 +557,10 @@ uint64_t demov::analyse_sel_on(cs_insn *ins) {
 	// only toggel on pass this point
 	std::stack<element> st;
 
+	// std::cout << "toggle on from " << ins[0].address << ": "  << ins[0].mnemonic << " " << ins[0].op_str << std::endl;
 	// find the condition of the toggle
 	dis.trace_back(&st, ins, (x86_reg) OP(ins, 1).mem.index, 0 /*sel_on*/);
+	// std::cout << "trace back finished" << std::endl;
 	// std::cout << std::hex << "toggle on if" << std::endl;
 	if (st.top().type == ELE_MEM && st.size() == 1) {
 		// specially for the toggle_execution statement
@@ -628,6 +631,7 @@ int demov::analyse() {
 				if (ins_tmp != nullptr) {
 					ins_tmp = dis.trace_back(ins_tmp, ins_tmp->detail->x86.operands[1].reg, 0);
 					if (is_dir_mem(&(ins_tmp->detail->x86.operands[1]), on)) {
+						//std::cout << "tracing back on from " << ins[i].address << std::endl;
 						analyse_sel_on(ins + i);
 					}
 				}
@@ -635,6 +639,7 @@ int demov::analyse() {
 
 			// find the label + jump target register
 			if (is_sel_mem(&(ins[i].detail->x86.operands[1]), sel_on)) {
+				//std::cout << "tracing back sel_on from " << ins[i].address << std::endl;
 				analyse_sel_on(ins + i);
 			}
 		}
@@ -672,6 +677,7 @@ int demov::analyse() {
 			if (dis.is_sel_target(&OP(ins + i, 1))) {
 				uint64_t t;
 				if (find_target(ins + i, &t)) continue;
+				std::cout << "target updated to 0x" << t << std::endl;
 				tar = t;
 			}
 

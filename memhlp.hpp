@@ -4,6 +4,9 @@
 #include <tuple>
 #include <map>
 #include <unordered_map>
+#include <string>
+#include <cstdint>
+#include <cstddef>
 #include <elf.h>
 
 enum symbl{

@@ -3,6 +3,9 @@
 
 #include <map>
 #include <unordered_map>
+#include <cstdint>
+#include <cstddef>
+
 #include <capstone/x86.h>
 
 class tainthlp{
@@ -14,7 +17,7 @@ class tainthlp{
 		 * @param ref the taint reference number (or colour or whatever)
 		 * @return 0 if successful, else 1
 		 */
-		int add_taint(uint64_t base, size_t len, size_t ref);
+		int add_taint(uint32_t base, size_t len, size_t ref);
 
 		/**
 		 * Querys whether an address is tainted
@@ -22,14 +25,14 @@ class tainthlp{
 		 * @param len The length of the quarryed area
 		 * @return true if any of the addresses are tainted, else false
 		 */
-		bool has_taint(uint64_t addr, size_t len);
+		bool has_taint(uint32_t addr, size_t len);
 
 		/**
 		 * Returns the taint information of an memory cell
 		 * @param addr The Memory address
 		 * @return the taint reference number
 		 */
-		size_t get_taint(uint64_t addr);
+		size_t get_taint(uint32_t addr);
 
 		/**
 		 * Taints a register and the subregisters (tainting ax also taints ah an al, but not eax)
@@ -54,6 +57,6 @@ class tainthlp{
 	private:
 		std::map<uint32_t, size_t> mem_taint;
 		std::unordered_map<x86_reg, size_t, std::hash<unsigned int> > reg_taint;
-}
+};
 
 #endif
