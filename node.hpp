@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <map>
+#include <cstdint>
 
 typedef enum adj_type{
 	ADJ_CNT,

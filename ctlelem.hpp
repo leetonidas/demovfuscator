@@ -2,6 +2,7 @@
 #define CTLELEM_H
 
 #include <string>
+#include <cstdint>
 
 enum ctlflow{
 	CTL_INVALID, CTL_JMP, CTL_JCC, CTL_RET, CTL_LABEL, CTL_CALL
